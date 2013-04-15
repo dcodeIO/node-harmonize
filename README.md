@@ -4,6 +4,8 @@ Enables node's --harmony flag programmatically.
 
 Usage
 -----
+`npm install harmonize`
+
 ```javascript
 require("harmonize")();
 ...
