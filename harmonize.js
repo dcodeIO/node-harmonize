@@ -35,7 +35,7 @@ module.exports = function() {
         });
         
         // Interrupt process flow in the parent
-        process.on("uncaughtException", function(e) {});
+        process.once("uncaughtException", function(e) {});
         throw("harmony");
     }
 };
