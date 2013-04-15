@@ -1,11 +1,13 @@
-node-harmonize - Enables node's --harmony flag programmatically.
-===============================================================
-Wait, what?
+node-harmonize
+==============
+Enables node's --harmony flag programmatically.
 
 Usage
 -----
 ```javascript
 require("harmonize")();
+...
+...
 ...
 ```
 
