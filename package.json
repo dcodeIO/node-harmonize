@@ -12,7 +12,9 @@
         "url": "https://github.com/dcodeIO/node-harmonize/issues"
     },
     "keywords": ["node", "harmony"],
-    "dependencies": {},
+    "dependencies": {
+        "is-iojs": "^1.0.0"
+    },
     "engines": {
         "node": ">=0.8"
     },
