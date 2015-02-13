@@ -20,7 +20,7 @@
  * see: https://github.com/dcodeIO/node-harmonize for details
  */
 var child_process = require("child_process");
-var isIojs        = require("isIojs");
+var isIojs        = require("is-iojs");
 
 module.exports = function() {
     if (typeof Proxy == 'undefined') { // We take direct proxies as our marker
