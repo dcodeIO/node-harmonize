@@ -20,20 +20,28 @@
  * see: https://github.com/dcodeIO/node-harmonize for details
  */
 var child_process = require("child_process");
+var isIojs        = require("isIojs");
 
 module.exports = function() {
     if (typeof Proxy == 'undefined') { // We take direct proxies as our marker
         var v = process.versions.node.split(".");
-        if (v[0] == 0 && v[1] < 8) {
+
+        if (!isIojs && v[0] == 0 && v[1] < 8) {
             throw("harmonize requires at least node v0.8");
         }
+
+        // harmony flag is unnecessary in io and beginning with node v0.12
+        if(isIojs || (!isIojs && v[0] == 0 && v[1] >= 12)) {
+            return;
+        }
+
         var node = child_process.spawn(process.argv[0], ['--harmony'].concat(process.argv.slice(1)), {});
         node.stdout.pipe(process.stdout);
         node.stderr.pipe(process.stderr);
         node.on("close", function(code) {
             process.exit(code);
         });
-        
+
         // Interrupt process flow in the parent
         process.once("uncaughtException", function(e) {});
         throw("harmony");
