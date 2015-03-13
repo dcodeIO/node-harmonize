@@ -21,7 +21,6 @@
  */
 var child_process = require("child_process");
 var isIojs        = require("is-iojs");
-var tty           = require('tty');
 
 module.exports = function() {
     if (typeof Proxy == 'undefined') { // We take direct proxies as our marker
@@ -36,9 +35,7 @@ module.exports = function() {
             return;
         }
 
-        var node = child_process.spawn(process.argv[0], ['--harmony', '--harmony-proxies'].concat(process.argv.slice(1)), { pty: tty.isatty(0) });
-        node.stdout.pipe(process.stdout);
-        node.stderr.pipe(process.stderr);
+        var node = child_process.spawn(process.argv[0], ['--harmony', '--harmony-proxies'].concat(process.argv.slice(1)), { stdio: 'inherit' });
         node.on("close", function(code) {
             process.exit(code);
         });
