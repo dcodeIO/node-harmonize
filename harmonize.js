@@ -44,8 +44,10 @@ module.exports = function(features) {
         	features = features.map(function(feat) {
         		return "--" + feat;
         	});
-        	if (features.indexOf("--harmony-proxies") < 0) // As it is our marker
-        		features.unshift("--harmony-proxies");
+            var p = features.indexOf("--harmony-proxies");
+            if (p >= 0)
+                features.splice(p, 1);
+            features.unshift("--harmony-proxies");
         }
 
         var node = child_process.spawn(process.argv[0], features.concat(process.argv.slice(1)), { stdio: 'inherit' });
