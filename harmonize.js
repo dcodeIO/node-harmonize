@@ -22,28 +22,38 @@
 var child_process = require("child_process");
 var isIojs        = require("is-iojs");
 
-module.exports = function() {
+/**
+ * harmonize
+ * @function
+ * @param {!Array.<string>=} features Defaults to ["harmony", "harmony-proxies"]
+ */
+module.exports = function(features) {
     if (typeof Proxy == 'undefined') { // We take direct proxies as our marker
         var v = process.versions.node.split(".");
 
-        if (!isIojs && v[0] == 0 && v[1] < 8) {
+        if (!isIojs && v[0] == 0 && v[1] < 8)
             throw("harmonize requires at least node v0.8");
-        }
 
         // harmony flag is unnecessary in io and beginning with node v0.12
-        if(isIojs || (!isIojs && v[0] == 0 && v[1] > 12)) {
+        if(isIojs || (!isIojs && v[0] == 0 && v[1] > 12))
             return;
-        }
 
-        var node = child_process.spawn(process.argv[0], ['--harmony', '--harmony-proxies'].concat(process.argv.slice(1)), { stdio: 'inherit' });
+        if (!features)
+        	features = ['--harmony', '--harmony-proxies'];
+        else
+        	features = features.map(function(feat) {
+        		return "--" + feat;
+        	});
+
+        var node = child_process.spawn(process.argv[0], features.concat(process.argv.slice(1)), { stdio: 'inherit' });
         node.on("close", function(code) {
             process.exit(code);
         });
 
         // Interrupt process flow in the parent
         process.once("uncaughtException", function(e) {});
-        throw("harmony");
+        throw "harmony";
     }
 };
 
-// Usage: require("harmonize")();
+// Usage: require("harmonize")([features]);
