@@ -35,7 +35,7 @@ module.exports = function(features) {
             throw("harmonize requires at least node v0.8");
 
         // harmony flag is unnecessary in io and beginning with node v0.12
-        if(isIojs || (!isIojs && v[0] == 0 && v[1] > 12))
+        if(isIojs || (!isIojs && v[0] == 0 && v[1] >= 12))
             return;
 
         if (!features)
