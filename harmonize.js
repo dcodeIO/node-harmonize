@@ -40,7 +40,7 @@ module.exports = function(features) {
 
         if (Array.isArray(features)) {
             for (var i=0; i<features.length; ++i)
-                features[i] = "--" + features[i].replace(/^\-+/, "");
+                features[i] = "--" + (""+features[i]).replace(/^\-+/, "");
             var p = features.indexOf("--harmony-proxies");
             if (p >= 0)
                 features.splice(p, 1);
