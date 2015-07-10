@@ -2,7 +2,7 @@
     "name": "harmonize",
     "description": "Enables node's --harmony flag programmatically.",
     "author": "Daniel Wirtz <dcode@dcode.io>",
-    "version": "1.4.2",
+    "version": "1.4.3",
     "main": "harmonize.js",
     "repository": {
         "type": "git",
@@ -18,5 +18,8 @@
     "engines": {
         "node": ">=0.8"
     },
-    "license": "Apache License, Version 2.0"
+    "scripts": {
+        "test": "node tests/test.js"
+    },
+    "license": "Apache-2.0"
 }

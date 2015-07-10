@@ -1,3 +1,4 @@
 console.log(typeof Proxy == 'undefined' ? "No harmony" : "Harmony");
-require(__dirname+"/../harmonize.js")(["harmony-generators"]);
+require("../harmonize.js")(["harmony-generators"]);
+require("./generators.js");
 console.log("OK");

@@ -38,17 +38,15 @@ module.exports = function(features) {
         if(isIojs || (!isIojs && v[0] == 0 && v[1] > 12))
             return;
 
-        if (!features)
-        	features = ['--harmony', '--harmony-proxies'];
-        else {
-        	features = features.map(function(feat) {
-        		return "--" + feat;
-        	});
+        if (Array.isArray(features)) {
+            for (var i=0; i<features.length; ++i)
+                features[i] = "--" + features[i].replace(/^\-+/, "");
             var p = features.indexOf("--harmony-proxies");
             if (p >= 0)
                 features.splice(p, 1);
             features.unshift("--harmony-proxies");
-        }
+        } else
+        	features = ['--harmony', '--harmony-proxies'];
 
         var node = child_process.spawn(process.argv[0], features.concat(process.argv.slice(1)), { stdio: 'inherit' });
         node.on("close", function(code) {
