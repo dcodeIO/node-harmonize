@@ -1,40 +1,52 @@
-node-harmonize
-==============
-Enables node's --harmony flag programmatically.
+harmonize
+=========
+Enables harmony features programmatically.
 
 Usage
 -----
-`npm install harmonize`
 
-```javascript
-require("harmonize")();
-...
-...
-...
-```
-
-If your code uses syntax not supported by the host without the `--harmony` flag, simply put it in a different file and require(...) it:
+Enabling just the `--harmony` flag:
 
 ```js
 require("harmonize")();
-var other = require("./somethingUsingGenerators.js")
-other();
 ```
 
-Activating specific features only
----------------------------------
-If you intend to activate just a specific set of harmony features, you can provide these to harmonize:
+Enabling specific features:
 
 ```js
-require("harmonize")(["harmony-generators"]);
-...
-...
-...
+require("harmonize")([
+    "harmony",
+    "harmony_sharedarraybuffer"
+]);
 ```
 
-Please note that this might result in an error message being printed to console if the flag is not supported
-by your version of node.
+Note that unsupported flags are simply ignored.
 
-License
--------
-Apache License, Version 2.0
+How it works
+------------
+
+```js
+var harmonize = require("harmonize");
+// ^ Transparently spawns another node process with --v8-options and
+//   parses enabled and supported harmony flags. You can also inspect
+//   these: console.log(harmonize.enabled, harmonize.supported);
+
+harmonize([ "harmony", ... ]);
+// ^ Interrupts process flow within the parent and starts a new process
+//   with the harmony flags you provided.
+
+// Everything below is executed within the harmonized child only.
+```
+
+Quirks
+------
+While no code below the call to `harmonize()` is executed within the
+parent, it must still be parseable without any additional flags.
+
+For example, if you are enabling generators which aren't supported by
+your node version without the respective flag, using generators syntax
+within the main file will result in a parse error. In such cases, just
+move code that requires a flag into a separate file and `require` it
+instead, which will prevent the parse error.
+
+**License:** [BSD 3-Clause License](https://opensource.org/licenses/BSD-3-Clause)

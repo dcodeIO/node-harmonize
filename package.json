@@ -1,9 +1,8 @@
 {
     "name": "harmonize",
-    "description": "Enables node's --harmony flag programmatically.",
-    "author": "Daniel Wirtz <dcode@dcode.io>",
-    "version": "1.4.4",
-    "main": "harmonize.js",
+    "description": "Enables --harmony flags programmatically.",
+    "author": "Daniel Wirtz",
+    "version": "2.0.0",
     "repository": {
         "type": "git",
         "url": "https://github.com/dcodeIO/node-harmonize.git"
@@ -12,14 +11,11 @@
         "url": "https://github.com/dcodeIO/node-harmonize/issues"
     },
     "keywords": ["node", "harmony"],
-    "dependencies": {
-        "is-iojs": "^1.0.1"
-    },
     "engines": {
         "node": ">=0.8"
     },
     "scripts": {
-        "test": "node tests/test.js"
+        "test": "node test.js"
     },
-    "license": "Apache-2.0"
+    "license": "BSD-3-Clause"
 }
