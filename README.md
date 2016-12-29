@@ -1,6 +1,8 @@
 harmonize
 =========
-Enables harmony features programmatically.
+[![Travis](https://img.shields.io/travis/dcodeIO/node-harmonize.svg)](https://travis-ci.org/dcodeIO/node-harmonize) [![npm](https://img.shields.io/npm/v/harmonize.svg)](https://www.npmjs.com/package/harmonize)
+
+Enables `--harmony` flags programmatically.
 
 Usage
 -----
@@ -47,6 +49,6 @@ For example, if you are enabling generators which aren't supported by
 your node version without the respective flag, using generators syntax
 within the main file will result in a parse error. In such cases, just
 move code that requires a flag into a separate file and `require` it
-instead, which will prevent the parse error.
+instead below `harmonize()`, which will prevent the parse error.
 
 **License:** [BSD 3-Clause License](https://opensource.org/licenses/BSD-3-Clause)
